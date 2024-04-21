@@ -1,4 +1,4 @@
-import userService from "../services/services"
+import userService from "../services/services.js"
 
 export function getUsers(req, res) {
     const userService = new userService();

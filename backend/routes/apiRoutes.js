@@ -1,11 +1,11 @@
 import { Router } from "express";
-import userServices from "../services/services"
+import userServices from "../services/services.js"
 import{
-    getAll
-} from "../controllers/controller";
+    getUsers
+} from "../controllers/controller.js";
 
 const userRouter = Router()
 
-userRouter.get("/verUsuarios", getAll)
+userRouter.get("/verUsuarios", getUsers)
 
 export default userRouter;
