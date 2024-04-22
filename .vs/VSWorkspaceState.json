@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\controllers",
+    "\\backend\\models",
+    "\\backend\\routes",
+    "\\backend\\services",
+    "\\backend\\views"
+  ],
+  "SelectedNode": "\\backend\\views\\deleteUser.ejs",
+  "PreviewInSolutionExplorer": false
+}
