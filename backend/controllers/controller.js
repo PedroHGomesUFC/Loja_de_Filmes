@@ -3,31 +3,34 @@ import userService from "../services/services.js"
 
 const userServices = new userService()
 
-export function getUsers(req, res) {
-    res.render("verUsuarios", {
-        pageTitle: 'User list',
-        users: userServices.getAll()
-    })
+export function getUsers() {
+    return userServices.getAll()
 }
 
-export function createUser(req, res, userName, email, password) {
-    res.render("createUser", {
-        pageTitle: 'Create User',
-        msg: userServices.createUser(userName, email, password)
-    })
+export function createUser(userName, email, password) {
+    return userServices.createUser(userName, email, password)
 }
 
-export function deleteUser(req, res, id) {
-    console.log("ID do usu�rio a ser exclu�do:", id); // Adicione esta linha
-    if (userServices.deleteUser(id)) {
-        res.render("verUsuarios", {
-            pageTitle: 'User list',
-            users: userServices.getAll()
-        });
+export function deleteUser(id) {
+    console.log('estou dentro da controller')
+    const users = userServices.getAll();
+
+    const index = users.findIndex(u => u.id == id);
+
+    if (index !== -1){
+        console.log('entrei no if e vou executar a função da service')
+        return [userServices.deleteUser(id), "Usuário deletado."]
     } else {
-        res.render("verUsuarios", {
-            pageTitle: 'falhou',
-            users: userServices.getAll()
-        });
+        return [userServices.getAll(), 'Nenhum usuário foi deletado.']
+    }
+}
+
+export function viewProfile(req, res, id){
+    const __user = userService(id)
+    if (user !== undefined){
+        res.render("viewProfile", {
+            pageTitle: 'Profile',
+            user: __user
+        })
     }
 }

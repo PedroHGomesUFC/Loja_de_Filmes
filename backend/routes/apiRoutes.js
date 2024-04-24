@@ -1,17 +1,24 @@
 import { Router } from "express";
-import {
+import{
     getUsers,
     createUser,
     deleteUser,
+    viewProfile
 } from "../controllers/controller.js";
 
 const userRouter = Router()
 
-userRouter.get("/getUsers", getUsers)
-
+userRouter.route("/getUsers")
+    .get((req, res) =>{
+        res.render("verUsuarios",{
+        pageTitle: 'User list',
+        users: getUsers()
+        })
+    })
+    
 userRouter.route("/createUsers")
-    .get((req, res) => {
-        res.render('createUser', {
+    .get((req,res) =>{
+        res.render('createUser',{
             pageTitle: 'Create User'
         })
     })
@@ -19,8 +26,8 @@ userRouter.route("/createUsers")
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
-
-        createUser(req, res, username, email, password);
+        createUser(username, email, password);
+        res.redirect("getUsers")
     })
 
 userRouter.route("/deleteUser")
@@ -29,14 +36,22 @@ userRouter.route("/deleteUser")
             pageTitle: 'Delete User'
         });
     })
-    .post((req, res) => {
+    .post((req, res) => { 
         const userId = req.body.id;
-        deleteUser(req, res, userId);
+        console.log('recebi o id do formulário')
+        res.render("verUsuarios", {
+            pageTitle: "Users List",
+            users: deleteUser(userId)[0],
+            msg: deleteUser(userId)[1]
+        })
     });
 
-
-
-
-
+userRouter.route('/Profile')
+    .get((req, res, id) => {
+        res.render("viewProfile",{
+            pageTitle: 'Profile',
+            user: viewProfile(id)
+        })
+    })
 
 export default userRouter;

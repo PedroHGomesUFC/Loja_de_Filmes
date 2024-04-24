@@ -1,5 +1,4 @@
 import userModel from "../models/user.js";
-import bodyParser from 'body-parser';
 
 class userService {
     constructor() {
@@ -18,14 +17,17 @@ class userService {
 
     createUser(userName, email, password) {
         const nextId = this.myUsers.length + 1;
-        this.myUsers.push(new userModel(userName, email, password, nextId));
-        return 'usuário criado';
+        return  this.myUsers.push(new userModel(userName, email, password, nextId));
     }
+
     deleteUser(id) {
-        console.log("ID do usuário a ser excluído:", id);
-        const index = this.myUsers.findIndex(u => u.id === id);
-        const deletedUser = this.myUsers.splice(index, 1)[0];
-        return true;
+        this.myUsers.splice(id, 1)[0];
+        console.log('estou na service')
+        return this.getAll()
+    }
+
+    vuewProfie(id){
+        return this.myUsers.findIndex(u => u.id === id);
     }
 }
 
