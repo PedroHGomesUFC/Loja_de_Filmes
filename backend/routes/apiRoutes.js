@@ -15,6 +15,10 @@ userRouter.route("/getUsers")
         users: getUsers()
         })
     })
+    .post((req, res) =>{
+        const userId = req.body.id;
+        res.redirect(`profile/${userId}`);
+    })
     
 userRouter.route("/createUsers")
     .get((req,res) =>{
@@ -38,19 +42,18 @@ userRouter.route("/deleteUser")
     })
     .post((req, res) => { 
         const userId = req.body.id;
-        console.log('recebi o id do formulário')
-        res.render("verUsuarios", {
+        res.render("deleteUser", {
             pageTitle: "Users List",
-            users: deleteUser(userId)[0],
-            msg: deleteUser(userId)[1]
+            msg: deleteUser(userId)
         })
     });
 
-userRouter.route('/Profile')
-    .get((req, res, id) => {
+userRouter.route('/profile/:id')
+    .get((req, res) => {
+        const userId = req.params.id;
         res.render("viewProfile",{
             pageTitle: 'Profile',
-            user: viewProfile(id)
+            user: viewProfile(userId)
         })
     })
 

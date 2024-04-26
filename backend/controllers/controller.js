@@ -16,21 +16,18 @@ export function deleteUser(id) {
     const users = userServices.getAll();
 
     const index = users.findIndex(u => u.id == id);
-
+    console.log(index)
     if (index !== -1){
-        console.log('entrei no if e vou executar a função da service')
-        return [userServices.deleteUser(id), "Usuário deletado."]
+        userServices.deleteUser(index)
+        return 'Usuário deletado'
     } else {
-        return [userServices.getAll(), 'Nenhum usuário foi deletado.']
+        return 'Nenhum usuário foi deletado.'
     }
 }
 
-export function viewProfile(req, res, id){
-    const __user = userService(id)
-    if (user !== undefined){
-        res.render("viewProfile", {
-            pageTitle: 'Profile',
-            user: __user
-        })
-    }
+export function viewProfile(id){
+    const user = userServices.viewProfile(parseInt(id));
+    if (user !== -1){
+       return user
+    } 
 }
