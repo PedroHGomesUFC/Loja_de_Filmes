@@ -4,7 +4,7 @@ import { dirname } from 'path';
 
 import path from 'path';
 import bodyParser from 'body-parser';
-import userRouter from "./routes/apiRoutes.js";
+import userRouter from "./routes/userRoutes.js";
 
 const app = express();
 const port = 3000;
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', userRouter)
+
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
