@@ -4,7 +4,7 @@ import { dirname } from 'path';
 
 import path from 'path';
 import bodyParser from 'body-parser';
-import userRouter from "./routes/userRoutes.js";
+import userRouter from "./routes/apiRoutes.js";
 
 const app = express();
 const port = 3000;
