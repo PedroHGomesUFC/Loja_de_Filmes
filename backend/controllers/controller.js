@@ -12,13 +12,13 @@ export function getUsers(_, res) {
 export function viewProfile(req, res) {
     const userId = req.params.id; 
     const user = userServices.viewProfile(parseInt(userId));
-    if (user !== -1) {
+    if (user) {
         res.render("viewProfile", {
             pageTitle: "Profile",
             user: user
         });
     } else {
-        res.status(404).send("Usuário não encontrado");
+        res.redirect("/users/notFound")    
     }
 }
 
@@ -32,12 +32,10 @@ export function createUser(req, res) {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    userServices.createUser(username, email, password);
+    const bio = req.body.bio;
+    userServices.createUser(username, email, password, bio);
     res.redirect("/users/getUsers");
 }
-
-
-
 
 
 export function deleteUserForm(req, res) {
@@ -55,10 +53,15 @@ export function deleteUser(req, res) {
 
 export function updateProfileForm(req, res) {
     const userId = req.params.id;
-    console.log("estou no form")
-    res.render("updateUser", {
-        pageTitle: 'Atualizar Informações',
-    });
+    const _user = userServices.viewProfile(parseInt(userId));
+    if(_user){
+        res.render("updateUser", {
+            pageTitle: 'Atualizar Informações',
+            user: _user
+        });
+    }else {
+        res.redirect("/users/notFound")
+    }
 }
 
 
@@ -66,6 +69,15 @@ export function updateProfile(req, res) {
     const newUserName = req.body.username;
     const newEmail = req.body.email;
     const id = req.params.id;
-    userServices.updateProfile(id, newUserName, newEmail);
-    res.redirect("/users/getUsers");
+    const bio = req.body.bio
+    const mensagem = userServices.updateProfile(id, newUserName, newEmail, bio)
+    res.render(`viewProfile`, {
+        pageTitle: 'PageTitle',
+        msg: mensagem, 
+        user: userServices.viewProfile(parseInt(id))
+    })
+}
+
+export function userNotFound(req, res) {
+    res.render('notFound')
 }
