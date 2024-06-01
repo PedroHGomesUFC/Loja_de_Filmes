@@ -1,7 +1,24 @@
 {
-  "dependencies": {
-    "ejs": "^3.1.10",
-    "express": "^4.19.2"
+  "name": "projeto-ufc",
+  "version": "1.0.0",
+  "description": "- `npm init`\r - `npm install express --save`\r - `npm install express`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module"
+  "author": "",
+  "license": "ISC",
+  "bugs": {},
+  "type": "module",
+  "devDependencies": {
+    "body-parser": "^1.20.2",
+    "debug": "^4.3.4",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
+  },
+  "dependencies": {
+    "i": "^0.3.7"
+  }
 }

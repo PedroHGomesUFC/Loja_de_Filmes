@@ -4,7 +4,8 @@ import { dirname } from 'path';
 
 import path from 'path';
 import bodyParser from 'body-parser';
-import userRouter from "./routes/apiRoutes.js";
+import userRouter from "./routes/userRoutes.js";
+import movieRouter from "./routes/movieRoutes.js";
 
 const app = express();
 const port = 3000;
@@ -15,14 +16,14 @@ const __dirname = dirname(__filename);
 app.set('views', path.join(__dirname, 'views'));
 
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 })
 
 app.use('/users', userRouter)
-
+app.use('/movies', movieRouter);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
