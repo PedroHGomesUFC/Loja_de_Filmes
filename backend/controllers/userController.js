@@ -1,82 +1,73 @@
 import userService from "../services/userServices.js"
 const userServices = new userService()
 
-export function getUsers(_, res) {
-    res.render('verUsuarios', {
-        pageTitle: 'User list',
-        users: userServices.getAll()
-    });
+
+export async function getUsers(_, res) {
+  try {
+    const users = await userServices.getAll();
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({err: error})
+  }
 }
 
-export function viewProfile(req, res) {
-    const userId = req.params.id; 
-    const user = userServices.viewProfile(parseInt(userId));
-    if (user) {
-        res.render("viewProfile", {
-            pageTitle: "Profile",
-            user: user
-        });
-    } else {
-        res.redirect("/users/notFound")    
+
+export async function viewProfile(req, res) {
+    try {
+        const userId = req.params.id; 
+        const user = await userServices.viewProfile(parseInt(userId));
+        res.status(200).json({user: user,
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({err: error,
+        })
     }
 }
 
 
-export function createUserForm(req, res) {
-         res.render('createUser', {
-        pageTitle: 'Create User'
-    })
-}
 export function createUser(req, res) {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-    const bio = req.body.bio;
-    userServices.createUser(username, email, password, bio);
-    res.redirect("/users/getUsers");
-}
-
-
-export function deleteUserForm(req, res) {
-    res.render("deleteUser", {
-        pageTitle: 'Delete User'
+    userServices.createUser([req.body.username, req.body.email, req.body.password, req.body.bio])
+    res.json({
+        msg: 'Novo usuário cadastrado'
     })
 }
+
+
 
 export function deleteUser(req, res) {
     const userId = req.body.id;
-    userServices.deleteUser(userId);
-    res.redirect("/users/getUsers");
-}
-
-
-export function updateProfileForm(req, res) {
-    const userId = req.params.id;
-    const _user = userServices.viewProfile(parseInt(userId));
-    if(_user){
-        res.render("updateUser", {
-            pageTitle: 'Atualizar Informações',
-            user: _user
-        });
-    }else {
-        res.redirect("/users/notFound")
+    if (!userId) {
+        res.status(400).json({ msg: 'ID de usuário não fornecido' });
+        return;
     }
+
+    userServices.deleteUser(userId).then(msg => {
+        res.json({
+            msg: msg
+        });
+    }).catch(error => {
+        res.status(500).json({
+            msg: 'Erro ao deletar o usuário',
+            error: error
+        });
+    });
 }
 
 
-export function updateProfile(req, res) {
-    const newUserName = req.body.username;
-    const newEmail = req.body.email;
-    const id = req.params.id;
-    const bio = req.body.bio
-    const mensagem = userServices.updateProfile(id, newUserName, newEmail, bio)
-    res.render(`viewProfile`, {
-        pageTitle: 'PageTitle',
-        msg: mensagem, 
-        user: userServices.viewProfile(parseInt(id))
-    })
-}
-
-export function userNotFound(req, res) {
-    res.render('notFound')
+export async function updateProfile(req, res) {
+    try {
+        const user = await userServices.updateProfile(
+           [req.body.username,
+            req.body.email,
+            req.body.bio,
+            req.params.id]
+        )
+        res.status(200).json({user: user })
+    } catch (error) {
+        res.status(500).json({
+            error: error
+        });
+    }
 }

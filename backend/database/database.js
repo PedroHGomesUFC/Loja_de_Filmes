@@ -8,7 +8,7 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const dbPath = path.resolve(__dirname, 'instance/database_Production.db');
+const dbPath = path.resolve(__dirname, 'instance/database.db');
 
 
 export class DatabaseConnection {
