@@ -10,6 +10,7 @@ CREATE TABLE users (
   email TEXT NOT NULL,
   password TEXT NOT NULL,
   bio TEXT NULL,
+  adm BOOLEAN NOT NULL
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

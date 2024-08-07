@@ -9,3 +9,6 @@ export default class movieModel {
         this.price = price;
     }
 }
+
+// TODO adicionar o cargo de adm no model e em todos.
+// AJUSTAR O GITHUB

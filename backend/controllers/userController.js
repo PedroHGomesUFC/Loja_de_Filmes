@@ -70,4 +70,28 @@ export async function updateProfile(req, res) {
             error: error
         });
     }
+
+}
+
+export async function userLogin(req, res) {
+    const userEmail = req.body.email;
+    const userPassword = req.body.password;
+    
+    if (!userEmail) {
+        res.status(400).json({ msg: 'email não fornecido' });
+        return;
+    }
+    
+    if (!userPassword) {
+        res.status(400).json({ msg: 'senha não fornecida' });
+        return;
+    }
+
+    try {
+        const login = await userServices.userLogin(userEmail, userPassword);
+        res.status(200).json(login);
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ msg: 'não foi possivel fazer o login', error });
+    }
 }

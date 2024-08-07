@@ -1,0 +1,479 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Sample API",
+        "description": "API for managing movies and users.",
+        "version": "1.0.0"
+    },
+    "host": "api.example.com",
+    "basePath": "/v1",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/users/getUsers": {
+            "get": {
+                "summary": "Returns a list of users.",
+                "description": "Retrieves all users in the database.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "id": "(number): The unique identifier for the user.",
+                        "username": "(string): The username of the user.",
+                        "email": "(string): The email address of the user.",
+                        "password": "(string): The password of the user.",
+                        "bio": " (string): A brief biography or description of the user.",
+                        "created_at": " (string): The timestamp indicating when the user account was created."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/users/viewProfile/{userId}": {
+            "get": {
+                "summary": "This endpoint retrieves the profile of a user with the specified user ID.",
+                "description": "Retrieves the details of a specific user by their ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "user": [
+                            {
+                                "id": " (integer) - The unique identifier of the user.",
+                                "username": "(string): The username of the user.",
+                                "email": "(string): The email address of the user.",
+                                "password": "(string): The password of the user.",
+                                "bio": " (string): A brief biography or description of the user.",
+                                "created_at": " (string): The timestamp indicating when the user account was created."
+                            }
+                        ]
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/users/createUser": {
+            "post": {
+                "summary": "This endpoint allows you to create a new user.",
+                "description": "Adds a new user to the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "bio": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "username",
+                                "email",
+                                "password"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User created",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "msg": {
+                                    "type": "string",
+                                    "example": "A message confirming the success of the user creation."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/deleteUser": {
+            "delete": {
+                "summary": "This endpoint is used to delete a user.",
+                "description": "Deletes a user from the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "id": "(number, required): The ID of the user to be deleted.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "msg": "Usuário deletado {$}"
+                    },
+                    "404": {
+                        "msg": "Nenhum usuário encontrado com o ID {$}"
+                    }
+                }
+            }
+        },
+        "/users/updateUser/{id}": {
+            "put": {
+                "summary": "Update a user.",
+                "description": "This endpoint allows the client to update the details of a user.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "bio": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "msg": "Usuário alterado"
+                    },
+                    "500": {
+                        "error": "Erro desconhecido"
+                    }
+                }
+            }
+        },
+        "/movies/getMovies": {
+            "get": {
+                "summary": "This endpoint retrieves a list of movies.",
+                "description": "This is a GET request to fetch the list of movies.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "movies": [
+                            {
+                                "id": " (number): The unique identifier for the movie.",
+                                "idTMDB": "(number): The movie's identifier in The Movie Database (TMDB).",
+                                "title": "(string): The title of the movie.",
+                                "plot": "(string): The plot or summary of the movie.",
+                                "released": "(string): The release date of the movie.",
+                                "runtime": "(string): The duration of the movie.",
+                                "gender": "(string): The genre of the movie.",
+                                "director": "(string): The director of the movie.",
+                                "writer": "(string): The writer of the movie.",
+                                "country": "(string): The country of origin for the movie.",
+                                "imdbRating:": "(number): The IMDb rating of the movie.",
+                                "price": "(number): The price of the movie.",
+                                "created": "(string): The date when the movie record was created."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "movies/viewMovie/{id}": {
+            "get": {
+                "summary": "This endpoint retrieves details of a specific movie.",
+                "description": "Retrieves the details of a specific movie by its ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "movie": [
+                            {
+                                "id": " (number): The unique identifier for the movie.",
+                                "idTMDB": "(number): The movie's identifier in The Movie Database (TMDB).",
+                                "title": "(string): The title of the movie.",
+                                "plot": "(string): The plot or summary of the movie.",
+                                "released": "(string): The release date of the movie.",
+                                "runtime": "(string): The duration of the movie.",
+                                "gender": "(string): The genre of the movie.",
+                                "director": "(string): The director of the movie.",
+                                "writer": "(string): The writer of the movie.",
+                                "country": "(string): The country of origin for the movie.",
+                                "imdbRating:": "(number): The IMDb rating of the movie.",
+                                "price": "(number): The price of the movie.",
+                                "created": "(string): The date when the movie record was created."
+                            }
+                        ]
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            }
+        },
+        "/movies/createMovie": {
+            "post": {
+                "summary": "This endpoint allows you to create a new movie entry.",
+                "description": "Adds a new movie to the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idTMDB": {
+                                    "type": "integer"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "plot": {
+                                    "type": "string"
+                                },
+                                "released": {
+                                    "type": "string"
+                                },
+                                "runtime": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "director": {
+                                    "type": "string"
+                                },
+                                "writer": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "imdbRating": {
+                                    "type": "number"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "default": 25.00
+                                }
+                            },
+                            "required": [
+                                "idTMDB",
+                                "title",
+                                "plot",
+                                "released",
+                                "runtime",
+                                "gender",
+                                "director",
+                                "writer",
+                                "country",
+                                "imdbRating",
+                                "price"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Movie created"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/movies/deleteMovie": {
+            "delete": {
+                "summary": "This endpoint is used to delete a movie.",
+                "description": "Deletes a movie from the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "id"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                          "msg": "filme deletado1"
+                    },
+                    "402": {
+                         "msg": "Nenhum filme foi encontrado com o ID 50"
+                    }
+                }
+            }
+        },
+        "/movies/updateMovie/{id}": {
+            "put": {
+                "summary": "This endpoint allows the user to update the details of a specific movie.",
+                "description": "Updates the details of an existing movie.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "idTMDB": {
+                                    "type": "integer"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "plot": {
+                                    "type": "string"
+                                },
+                                "released": {
+                                    "type": "string"
+                                },
+                                "runtime": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "director": {
+                                    "type": "string"
+                                },
+                                "writer": {
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "type": "string"
+                                },
+                                "imdbRating": {
+                                    "type": "number"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "default": 25.00
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movie updated"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,6 +7,8 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import userRouter from "./routes/userRoutes.js";
 import movieRouter from "./routes/movieRoutes.js";
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './utils/swagger.json' assert { type: 'json' };
 
 const app = express();
 const port = 3000;
@@ -16,11 +18,14 @@ const __dirname = dirname(__filename);
 
 const corsOptions = {
   origin: 'http://localhost:8080', // Permitir apenas este domínio
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200 
 };
 
 app.use(cors(corsOptions)); 
 app.set('views', path.join(__dirname, 'views'));
+
+//swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());

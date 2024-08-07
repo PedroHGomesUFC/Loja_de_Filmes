@@ -4,6 +4,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default {
   name: 'MovieDetails',
@@ -63,54 +64,38 @@ export default {
 
         const movieData = await movieResponse.json();
         const creditsData = await creditsResponse.json();
-
-        this.movieDetails = {
-          idTMDB: this.movieId || '',
-          title: movieData.title || '',
-          plot: movieData.overview || '',
-          released: movieData.release_date || '',
-          runtime: movieData.runtime || '',
-          genre: movieData.genres ? movieData.genres.map(genre => genre.name).join(', ') : '',
-          director: this.getDirector(creditsData.crew) || 'Unknown',
-          writer: this.getWriter(creditsData.crew) || 'Unknown',
-          country: movieData.production_countries ? movieData.production_countries.map(country => country.name).join(', ') : '',
-          awards: movieData.awards || '',
-          imdbRating: movieData.vote_average || ''
-        };
-
-        if (this.movieDetails.title !== "") {
+        
+        if ( movieData.title !== "") {
           axios.post('http://localhost:3000/movies/createMovie', {
-            idTMDB: this.movieDetails.idTMDB,
-            title: this.movieDetails.title,
-            plot: this.movieDetails.plot,
-            released: this.movieDetails.released,
-            runtime: this.movieDetails.runtime,
-            gender: this.movieDetails.genre,
-            director: this.movieDetails.director,
-            writer: this.movieDetails.writer,
-            country: this.movieDetails.country,
-            imdbRating: this.movieDetails.imdbRating
+            idTMDB: this.movieId || '',
+            title: movieData.title || '',
+            plot: movieData.overview || '',
+            released: movieData.release_date || '',
+            runtime: movieData.runtime || '',
+            gender: movieData.genres ? movieData.genres.map(genre => genre.name).join(', ') : '',
+            director: this.getDirector(creditsData.crew) || 'Unknown',
+            writer: this.getWriter(creditsData.crew) || 'Unknown',
+            country: movieData.production_countries ? movieData.production_countries.map(country => country.name).join(', ') : '',
+            imdbRating: movieData.vote_average || ''
           }, { timeout: 10000 })
-            .then(response => {
-              if (response.data.success) {
-                this.successMessage = response.data.message;
-                this.errorMessage = '';
-              } else {
-                this.errorMessage = response.data.message;
-                this.successMessage = '';
-              }
+            .then(()=> {
+              Swal.fire({
+              icon: 'success',
+              title: 'Sucesso!',
+              text: 'Filme adicionado com sucesso'
+              //TODO adicionar o style
+            });
             })
             .catch(error => {
               console.error('Erro ao adicionar filme:', error);
               this.errorMessage = error.response ? error.response.data.message : 'Erro ao tentar adicionar o filme. Verifique a conexão ou tente novamente mais tarde.';
-              this.successMessage = '';
             });
-        }
 
+          }
+          
       } catch (error) {
         console.error('Error fetching movie details or adding to database:', error);
         this.errorMessage = 'Erro ao buscar detalhes do filme ou adicionar ao banco de dados.';
-        this.successMessage = '';
       }
     },
     getDirector(crew) {

@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "i": "^0.3.7"
+    "i": "^0.3.7",
+    "jsonwebtoken": "^9.0.2",
+    "swagger-ui-express": "^5.0.1"
   }
 }
