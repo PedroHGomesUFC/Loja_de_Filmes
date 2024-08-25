@@ -10,5 +10,4 @@ export default class movieModel {
     }
 }
 
-// TODO adicionar o cargo de adm no model e em todos.
-// AJUSTAR O GITHUB
+// TODO adicionar o cargo de adm no model.

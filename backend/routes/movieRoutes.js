@@ -10,11 +10,11 @@ import {
 
 const movieRouter = Router();
 
-movieRouter.get("/getMovies", getMovies);
-movieRouter.get("/viewMovie/:id", viewMovie);
-movieRouter.post("/createMovie", createMovie);
-movieRouter.delete("/deleteMovie", deleteMovie);
-movieRouter.put("/updateMovie/:id", updateMovie);
+movieRouter.get("/", getMovies);
+movieRouter.get("/:id", viewMovie);
+movieRouter.post("/", createMovie);
+movieRouter.delete("/", deleteMovie);
+movieRouter.put("/:id", updateMovie);
 movieRouter.post('/addToCart', addToCart);
 movieRouter.get('/getCart', getCart);
 

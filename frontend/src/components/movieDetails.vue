@@ -66,7 +66,7 @@ export default {
         const creditsData = await creditsResponse.json();
         
         if ( movieData.title !== "") {
-          axios.post('http://localhost:3000/movies/createMovie', {
+          axios.post('http://localhost:3000/movies/', {
             idTMDB: this.movieId || '',
             title: movieData.title || '',
             plot: movieData.overview || '',

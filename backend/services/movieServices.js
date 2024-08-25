@@ -60,23 +60,6 @@ class movieService {
     }
 
 
-
-    // createMovies(listOfAtributes) {
-    //     listOfAtributes.push(25)
-    //     if (verificationOfFormAtributes(listOfAtributes)) {
-    //         this.dbConnection.serialize((eee, err) => {
-    //             try {
-    //                 const querry = `INSERT INTO movies (idTMDB, title, plot, released, runtime, gender, director, writer, country, imdbRating, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-    //                 this.dbConnection.run(querry, listOfAtributes)
-    //             }
-    //             catch (err) {
-    //                 console.log(err)
-    //             }
-    //         })
-    //         return "Filme cadastrado"
-    //     }
-    //     return "Preencha Formulário"
-    // }
     deleteMovie(id) {
         return new Promise((resolve, reject) => {
             if (!id) {
@@ -116,7 +99,7 @@ class movieService {
     updateMovie(listOfAtributes) {
         if (verificationOfFormAtributes(listOfAtributes)) {
             return new Promise((resolve, reject) => {
-                const query = 'UPDATE movies SET title = ?, plot = ?, released = ?, runtime = ?, gender = ?, director = ?, poster = ?, writer = ?, country = ?, awards = ?, imdbRating = ?, price = ? where id = ?';
+                const query = 'UPDATE movies SET title = ?, plot = ?, released = ?, runtime = ?, gender = ?, director = ?, writer = ?, country = ?, imdbRating = ?, price = ? where id = ?';
                 this.dbConnection.run(query, listOfAtributes, function (err) {
                     if (this.changes === 0) {
                         reject({ error: err });
