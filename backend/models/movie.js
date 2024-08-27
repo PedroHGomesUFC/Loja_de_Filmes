@@ -9,5 +9,3 @@ export default class movieModel {
         this.price = price;
     }
 }
-
-// TODO adicionar o cargo de adm no model.

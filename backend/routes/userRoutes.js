@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 import { AuthService } from "../services/authServices.js";
 import {
@@ -13,7 +14,7 @@ const authService = new AuthService();
 
 const userRouter = Router()
 
-userRouter.get("/", authService.verifyJWT, getUsers);
+userRouter.get("/", authService.verifyJWT, authService.verifyADM, getUsers);
 userRouter.get("/:id", authService.verifyJWT, viewProfile);
 userRouter.post("/", createUser);
 userRouter.delete("/", authService.verifyJWT, deleteUser);

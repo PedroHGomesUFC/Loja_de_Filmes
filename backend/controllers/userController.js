@@ -113,7 +113,6 @@ export async function userLogin(req, res) {
         const login = await userServices.userLogin(userEmail, userPassword);
         res.status(200).json(login);
     } catch (error) {
-        console.error(error);
         res.status(400).json({ msg: 'não foi possivel fazer o login', error });
     }
 }

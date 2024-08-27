@@ -78,6 +78,7 @@ class userService {
             });
         }
     }
+
     userLogin(email, password) {
         return new Promise((resolve, reject) => {
             const query = 'SELECT * FROM USERS WHERE (email = ?) AND (password = ?)';
@@ -89,12 +90,12 @@ class userService {
                 if (user) {
                     const token = this.authService.userToken(user.id);
                     resolve(token);
-                } else {
+                } 
+                else {
                     reject("Usuário não encontrado ou senha inválida.");
                 }
             })
         })
-
     }
 }
 
