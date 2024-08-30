@@ -3,29 +3,19 @@
   <div class="main">
     <button class="nav left" @click="scrollLeft">&#9664;</button>
     <div id="slider" ref="slider">
-      <Card :movieId="527774" class="Card"/> <!-- ID do filme "Raya e o Último Dragão" -->
-      <Card :movieId="13403" class="Card"/> <!-- ID do filme "Hedwig" -->
-      <Card :movieId="569094" class="Card"/> <!-- ID do filme "aranhaverso" -->
-      <Card :movieId="603692" class="Card"/> <!-- ID do filme "John Wick 4" -->
-      <Card :movieId="675353" class="Card"/> <!-- ID do filme "Sonic 2" -->
-      <Card :movieId="467244" class="Card"/> <!-- ID do filme "The Zone of Interest" -->
-      <Card :movieId="872585" class="Card"/> <!-- ID do filme "Oppenheimer" -->
-      <Card :movieId="619264" class="Card"/> <!-- ID do filme "O Poço" -->
-      <Card :movieId="1022789" class="Card"/> <!-- ID do filme "Divertidamente 2" -->
-      <Card :movieId="315162" class="Card"/> <!-- ID do filme "Gato de Botas 2" -->
-      <Card :movieId="786892" class="Card"/> <!-- ID do filme "Furiosa" -->
-      <Card :movieId="238" class="Card"/> <!-- ID do filme "The Godfather" -->
-      <Card :movieId="693134" class="Card"/> <!-- ID do filme "Dune 2" -->
-      
+      <Card v-for="movieId in movieIds"
+      :key="movieId"
+      :movieId="movieId"
+      class="Card"/>
     </div>
     <button class="nav right" @click="scrollRight">&#9654;</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Card from "./card.vue";
-
+import axios from 'axios';
 export default {
   name: 'Carrossel',
   components: {
@@ -33,6 +23,16 @@ export default {
   },
   setup() {
     const slider = ref(null);
+    const movieIds = ref([])
+
+    const fetchMovieIds = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/movies/');
+        movieIds.value = response.data.movies.map(movie => movie.idTMDB);
+      } catch(error) {
+        console.log('Erro ao buscar Id dos filmes: ', error)
+      }
+    }
 
     const scrollLeft = () => {
       slider.value.scrollBy({
@@ -48,8 +48,13 @@ export default {
       });
     };
 
+    onMounted(() => {
+      fetchMovieIds();
+    })
+
     return {
       slider,
+      movieIds,
       scrollLeft,
       scrollRight
     };

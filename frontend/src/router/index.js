@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import MovieView from '../views/MovieView.vue';
 import AddMovie from '../views/AddMovie.vue';
+import loginView from '../views/loginView.vue';
+
 const routes = [
   {
     path: '/',
@@ -17,6 +19,10 @@ const routes = [
     path: '/AddMovie',
     name: 'AddMovie',
     component: AddMovie
+  }, {
+    path: '/login',
+    name: 'login',
+    component: loginView
   }
 
 ];

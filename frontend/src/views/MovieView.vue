@@ -2,14 +2,14 @@
   <Header />
   <div class="container">
     <div id="details" v-if="movie">
-      <h1>{{ movie.title }}</h1>
-      <p>{{ movie.plot }}</p>
-      <p><strong>Director:</strong> {{ movie.director }}</p>
-      <p><strong>Country:</strong> {{ movie.country }}</p>
-      <p><strong>Released:</strong> {{ movie.released }}</p>
-      <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
-      <p><strong>IMDB Rating:</strong> {{ movie.imdbRating }}</p>
-      <p><strong>Writer:</strong> {{ movie.writer }}</p>
+      <h1 id="title">{{ movie.title }}</h1>
+      <p id="plot">{{ movie.plot }}</p>
+      <p class="info"> <strong> Director: </strong> {{ movie.director }}</p>
+      <p class="info"> <strong>Country: </strong> {{ movie.country }}</p>
+      <p class="info"> <strong>Released: </strong> {{ movie.released }}</p>
+      <p class="info"> <strong>Runtime: </strong> {{ movie.runtime }} minutes</p>
+      <p class="info"> <strong>IMDb Rating: </strong> {{ movie.imdbRating }}</p>
+      <p class="info"> <strong>Writer: </strong> {{ movie.writer }}</p>
       <p><strong>Price:</strong> R${{ movie.price }}</p>
     </div>
     <div id="imgDetails">
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     viewMovie(id) {
-      this.axios.get(`http://localhost:3000/movies/viewMovie/${id}`)
+      this.axios.get(`http://localhost:3000/movies/${id}`)
         .then(response => {
           this.movie = response.data.movie[0];
         })
@@ -83,5 +83,22 @@ export default {
   width: 25vw !important;
   height: auto !important;
   border-radius: 3%;
+}
+#details #title {
+  font-family: 'Coolvetica';
+  font-weight: normal;
+  font-size: 30pt;
+  letter-spacing: 1px;
+  padding-top: 30px;
+}
+#plot {
+  font-family: 'sf pro display';
+  font-size: 1.1em;
+  padding-top: 2px;
+  padding-bottom: 20px;
+}
+.info {
+  font-family: 'sf pro display';
+  font-size: 1em;
 }
 </style>
