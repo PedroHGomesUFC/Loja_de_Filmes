@@ -28,6 +28,7 @@
     },
     methods: {
       login() {
+
         axios.post('http://localhost:3000/users/login', {
           email: this.email,
           password: this.password
@@ -38,7 +39,11 @@
         })
         .catch(error => {
           console.log('Erro ao fazer login:', error.response);
-          this.errorMessage = error.response.data;
+          if(error.response.data.error == undefined) { // esse serve para que caso o usuario tente fazer login sem fornece email ou senha de uma resposta.
+            this.errorMessage = error.response.data.msg;
+            return
+          }
+          this.errorMessage = error.response.data.error;
         });
       }
     }
