@@ -6,10 +6,11 @@ export class CartServices {
         this.dbConnection = DatabaseConnection.getDbConnection()
     }
 
-    addToCart(id) {
+    addToCart(movie_id, user_id) {
         return new Promise((resolve, reject) => {
             const query = `INSERT INTO cart (movie_id, user_id)  VALUES (?, ?)`;
-            this.dbConnection.all(query, [id, rand()], (err, rows) =>{
+            const values = [movie_id, user_id];
+            this.dbConnection.run(query, values, (err, rows) =>{
                 if (err){
                     reject(err)
                 }
@@ -21,7 +22,7 @@ export class CartServices {
     getCart() {
         return new Promise((resolve, reject) => {
             const query = `SELECT movie_id FROM cart WHERE user_id = ?`;
-            this.dbConnection.all(query, [rand()], (err, rows) =>{
+            this.dbConnection.all(query, id, (err, rows) =>{
                 if (err){
                     reject(err)
                 }
