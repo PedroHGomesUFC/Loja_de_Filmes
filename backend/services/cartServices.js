@@ -25,7 +25,7 @@ export class CartServices {
                 if (err){
                     reject(err)
                 }
-                resolve(rows)
+                resolve(rows, query)
             })
         });
     }

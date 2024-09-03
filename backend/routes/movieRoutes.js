@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { AuthService } from "../services/authServices.js";
 import {addToCart, getCart} from '../controllers/cartController.js'
 import {
     getMovies,
@@ -7,10 +8,11 @@ import {
     viewMovie,
     updateMovie
 } from "../controllers/movieController.js";
+const authService = new AuthService();
 
 const movieRouter = Router();
 
-movieRouter.get("/", getMovies);
+movieRouter.get("/", authService.verifyJWT,  getMovies);
 movieRouter.get("/:id", viewMovie);
 movieRouter.post("/", createMovie);
 movieRouter.delete("/", deleteMovie);

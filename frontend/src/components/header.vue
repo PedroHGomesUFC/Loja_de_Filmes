@@ -18,7 +18,7 @@
             alt="icone de pesquisa de filmes"></a></span> <!-- ícone de busca -->
       <span class="icon"><a href="#"><img src="../../public/img/icons/icon_Buycard.svg"
             alt="icone de carrinho de compras dos filmes"></a></span> <!-- ícone de carrinho -->
-      <span class="icon"><a href="#"><img src="../../public/img/icons/icon_Profile.svg"
+      <span class="icon"><a href="http://localhost:8080/login"><img src="../../public/img/icons/icon_Profile.svg"
             alt="icone do perfil do usuário"></a></span> <!-- ícone de usuário -->
     </div>
   </div>

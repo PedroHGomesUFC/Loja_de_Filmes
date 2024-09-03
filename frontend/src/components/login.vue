@@ -34,10 +34,11 @@
         })
         .then(response => {
           console.log('Login bem-sucedido', response.data);
+          localStorage.setItem('token', response.data.token);
         })
         .catch(error => {
-          console.log('Erro ao fazer login:', error.response.data);
-          this.errorMessage = error.response.data.error;
+          console.log('Erro ao fazer login:', error.response);
+          this.errorMessage = error.response.data;
         });
       }
     }

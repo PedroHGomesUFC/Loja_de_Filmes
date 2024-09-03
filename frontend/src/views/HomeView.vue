@@ -15,6 +15,8 @@ import Banner from '@/components/banner.vue';
 import Carrossel from '@/components/carrossel.vue';
 import FeaturedMovie from '@/components/featuredMovie.vue';
 
+const token = localStorage.getItem('token');
+console.log(token);
 export default {
   name: 'MovieView',
   components: {
@@ -23,8 +25,8 @@ export default {
     Banner,
     Carrossel,
     FeaturedMovie
-  }
-};
+  },
+}
 </script>
 
 <style>

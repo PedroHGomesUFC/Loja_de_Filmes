@@ -18,7 +18,7 @@ userRouter.get("/", authService.verifyJWT, authService.verifyADM, getUsers);
 userRouter.get("/:id", authService.verifyJWT, viewProfile);
 userRouter.post("/", createUser);
 userRouter.delete("/", authService.verifyJWT, deleteUser);
-userRouter.put("/:id", updateProfile);
+userRouter.put("/:id", authService.verifyJWT, updateProfile);
 userRouter.post("/login", userLogin);
 
 export default userRouter;
