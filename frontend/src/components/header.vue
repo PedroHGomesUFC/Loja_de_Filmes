@@ -1,28 +1,29 @@
 <template>
-
   <div class="header">
     <div class="logo-links">
       <router-link to="/" class="logo">
-        <a href="">
-          <img src="../../public/img/E-Motion.svg" alt="logo e-motion">
-        </a>
+        <img src="../../public/img/E-Motion.svg" alt="logo e-motion">
       </router-link>
       <nav class="nav-links">
-        <a href="#">Inicio</a>
-        <a href="#">Categoria</a>
-        <a href="#">Favoritos</a>
+        <router-link to="/">Início</router-link>
+        <router-link to="#">Categoria</router-link>
+        <router-link to="#">Favoritos</router-link>
       </nav>
     </div>
     <div class="icons">
-      <span class="icon"><a href="#"><img src="../../public/img/icons/icon_Search.svg"
-            alt="icone de pesquisa de filmes"></a></span> <!-- ícone de busca -->
-      <span class="icon"><a href="#"><img src="../../public/img/icons/icon_Buycard.svg"
-            alt="icone de carrinho de compras dos filmes"></a></span> <!-- ícone de carrinho -->
-      <span class="icon"><a href="http://localhost:8080/login"><img src="../../public/img/icons/icon_Profile.svg"
-            alt="icone do perfil do usuário"></a></span> <!-- ícone de usuário -->
+      <span class="icon">
+        <router-link to="#"><img src="../../public/img/icons/icon_Search.svg" alt="icone de pesquisa de filmes"></router-link>
+      </span> <!-- ícone de busca -->
+      <span class="icon">
+        <router-link to="#"><img src="../../public/img/icons/icon_Buycard.svg" alt="icone de carrinho de compras dos filmes"></router-link>
+      </span> <!-- ícone de carrinho -->
+      <span class="icon">
+        <router-link to="/login"><img src="../../public/img/icons/icon_Profile.svg" alt="icone do perfil do usuário"></router-link>
+      </span> <!-- ícone de usuário -->
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
