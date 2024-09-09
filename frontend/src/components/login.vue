@@ -28,7 +28,6 @@
     },
     methods: {
       login() {
-
         axios.post('http://localhost:3000/users/login', {
           email: this.email,
           password: this.password

@@ -9,6 +9,13 @@ export async function addToCart(req, res){
 }
 
 
-export async function getCart(_, res){
-    res.send(await cartServices.getCart())
+export async function getCart(req, res) {
+    const id = req.params.id;  // Pegando o user_id do parâmetro de rota
+    
+    try {
+        const cartItems = await cartServices.getCart(id);
+        res.json(cartItems);
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }

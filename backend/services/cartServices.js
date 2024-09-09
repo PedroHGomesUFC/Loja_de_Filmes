@@ -1,12 +1,24 @@
 import { DatabaseConnection } from "../database/database.js";
-import {rand} from "../utils/randInt.js"
 
 export class CartServices {
     constructor() {
         this.dbConnection = DatabaseConnection.getDbConnection()
     }
 
-    addToCart(movie_id, user_id) {
+    async addToCart(movie_id, user_id) {
+        const buyList = await new Promise((resolve, reject) => {
+            const query = `SELECT COUNT(*) as count FROM cart WHERE movie_id = ?`
+            this.dbConnection.get(query, movie_id, (err, row) => {
+                if(err) {
+                    reject(err)
+                }
+                resolve(row.count > 0)
+            })
+        })
+    if(buyList) {
+        return 'Filme já está na lista'
+    }
+
         return new Promise((resolve, reject) => {
             const query = `INSERT INTO cart (movie_id, user_id)  VALUES (?, ?)`;
             const values = [movie_id, user_id];
@@ -19,15 +31,17 @@ export class CartServices {
         })
     }
 
-    getCart() {
+    async getCart(id) {
         return new Promise((resolve, reject) => {
-            const query = `SELECT movie_id FROM cart WHERE user_id = ?`;
+            const query = `SELECT movie_id FROM cart WHERE cart.user_id = ?`;
             this.dbConnection.all(query, id, (err, rows) =>{
                 if (err){
-                    reject(err)
+                    reject("Erro ao buscar filmes no carrinho: " + err); // Erro mais claro
+                } else {
+                    resolve(rows); // Retornar somente os resultados
                 }
-                resolve(rows, query)
-            })
+            });
         });
     }
+    
 }

@@ -55,6 +55,7 @@ VALUES
 --   FOREIGN KEY (user_id) REFERENCES users(id),
 --   FOREIGN KEY (movie_id) REFERENCES movies(id)
 -- );
+SELECT movie_id from cart_movie WHERE user_id = ?
 
 CREATE TABLE cart (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -62,4 +63,13 @@ CREATE TABLE cart (
   user_id INTEGER,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (movie_id) REFERENCES movies(id)
+) 
+
+CREATE TABLE cart_movie (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER,
+  user_id INTEGER,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  UNIQUE (movie_id)
 )

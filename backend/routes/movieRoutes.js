@@ -21,6 +21,6 @@ movieRouter.post("/", createMovie);
 movieRouter.delete("/", deleteMovie);
 movieRouter.put("/:id", updateMovie);
 movieRouter.post('/addToCart', addToCart);
-movieRouter.get('/getCart', getCart);
+movieRouter.get('/getCart/:id', getCart);
 
 export default movieRouter;
