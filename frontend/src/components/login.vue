@@ -34,7 +34,7 @@
         })
         .then(response => {
           console.log('Login bem-sucedido', response.data);
-          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('token', response.data.token.token);
         })
         .catch(error => {
           console.log('Erro ao fazer login:', error.response);

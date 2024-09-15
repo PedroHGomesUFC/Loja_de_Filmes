@@ -79,6 +79,7 @@ class userService {
         }
     }
 
+
     userLogin(email, password) {
         return new Promise((resolve, reject) => {
             const query = 'SELECT * FROM USERS WHERE (email = ?) AND (password = ?)';
@@ -88,8 +89,7 @@ class userService {
                     reject(err);
                 }
                 if (user) {
-                    const token = this.authService.userToken(user.id);
-                    resolve(token);
+                    resolve(user);
                 } 
                 else {
                     reject("Usuário não encontrado ou senha inválida.");
@@ -97,8 +97,26 @@ class userService {
             })
         })
     }
-}
 
+    // userLogin(email, password) {
+    //     return new Promise((resolve, reject) => {
+    //         const query = 'SELECT * FROM USERS WHERE (email = ?) AND (password = ?)';
+    //         const values = [email, password];
+    //         this.dbConnection.get(query, values, (err, user) => {
+    //             if (err) {
+    //                 reject(err);
+    //             }
+    //             if (user) {
+    //                 const token = this.authService.userToken(user.id);
+    //                 resolve(token);
+    //             } 
+    //             else {
+    //                 reject("Usuário não encontrado ou senha inválida.");
+    //             }
+    //         })
+    //     })
+    // }
+}
 
 
 export default userService;

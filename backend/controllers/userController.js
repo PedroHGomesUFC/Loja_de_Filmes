@@ -1,6 +1,7 @@
-import userService from "../services/userServices.js"
-const userServices = new userService()
-
+import userService from "../services/userServices.js";
+import AuthService from "../services/authServices.js";
+const userServices = new userService();
+const authService = new AuthService();
 
 export async function getUsers(_, res) {
     try {
@@ -108,10 +109,14 @@ export async function userLogin(req, res) {
         res.status(400).json({ msg: 'senha não fornecida' });
         return;
     }
-
+    
     try {
         const login = await userServices.userLogin(userEmail, userPassword);
-        res.status(200).json(login);
+        console.log(login.id)
+        const token = authService.userToken(login.id);
+        console.log(token)
+        res.status(200).json({token, user: login });
+        
     } catch (error) {
         res.status(400).json({ msg: 'não foi possivel fazer o login', error });
     }
