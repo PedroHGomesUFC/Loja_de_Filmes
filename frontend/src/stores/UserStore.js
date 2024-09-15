@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', () => {
   // Função de autenticação para salvar os dados após o login
   function authenticate(response) {
     const authUser = response.data.user
-    const token = response.data.jwt
+    const token = response.data.token.token
 
     // Atualizando o estado do usuário
     user.value = {
