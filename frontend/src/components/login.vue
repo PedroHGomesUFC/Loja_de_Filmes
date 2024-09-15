@@ -11,43 +11,53 @@
   </template>
   
   <script>
-  import Footer from '@/components/footer.vue';
-  import axios from 'axios';
-  
-  export default {
-    name: "login",
-    components: {
-      Footer
-    },
-    data() {
-      return {
-        email: '',
-        password: '',
-        errorMessage: '' 
-      };
-    },
-    methods: {
-      login() {
-        axios.post('http://localhost:3000/users/login', {
-          email: this.email,
-          password: this.password
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { useUserStore } from '../stores/UserStore'
+
+export default {
+  name: 'Login',
+  setup() {
+    const email = ref('')
+    const password = ref('')
+    const errorMessage = ref('')
+    const router = useRouter()
+
+    // Aqui você chama o useUserStore dentro do setup
+    const userStore = useUserStore()
+
+    const login = async () => {
+      try {
+        const response = await axios.post('http://localhost:3000/users/login', {
+          email: email.value,
+          password: password.value,
         })
-        .then(response => {
-          console.log('Login bem-sucedido', response.data);
-          localStorage.setItem('token', response.data.token.token);
-        })
-        .catch(error => {
-          console.log('Erro ao fazer login:', error.response);
-          if(error.response.data.error == undefined) { // esse serve para que caso o usuario tente fazer login sem fornece email ou senha de uma resposta.
-            this.errorMessage = error.response.data.msg;
-            return
-          }
-          this.errorMessage = error.response.data.error;
-        });
+
+        // Chama a função authenticate do store para salvar os dados do usuário
+        userStore.authenticate(response)
+
+        // Redireciona o usuário após login bem-sucedido
+        router.push('/')
+      } catch (error) {
+        console.log('Erro ao fazer login:', error.response)
+        if (error.response?.data?.error === undefined) {
+          errorMessage.value = error.response.data.msg
+        } else {
+          errorMessage.value = error.response.data.error
+        }
       }
     }
-  }
-  </script>
+
+    return {
+      email,
+      password,
+      errorMessage,
+      login,
+    }
+  },
+}
+</script>
   
   <style>
   .form_login h2 {

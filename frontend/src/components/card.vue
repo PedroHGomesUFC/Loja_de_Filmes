@@ -26,12 +26,12 @@ export default {
     const movieId = ref(props.movieId);
 
     const displayImage = (imageUrl) => {
-      console.log('Image received:', imageUrl);
+      // console.log('Image received:', imageUrl);
       image.value = imageUrl;
     };
 
     const saveMovieId = (id) => {
-      console.log('Movie ID received:', id);
+      // console.log('Movie ID received:', id);
       movieId.value = id;
     };
 
