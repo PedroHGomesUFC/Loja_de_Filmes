@@ -19,3 +19,15 @@ export async function getCart(req, res) {
         res.status(500).send(error);
     }
 }
+
+export async function deleteMovieCart(req, res) {
+    const id = req.params.id;
+    const movie_id = req.body.movie_id;
+    try {
+        const cartMovies = await cartServices.deleteMovieCart(movie_id, id);
+        res.status(200).send('Apagado com sucesso')
+    }
+    catch(error) {
+        res.status(500).send(error)
+    }
+}

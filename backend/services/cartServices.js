@@ -43,5 +43,19 @@ export class CartServices {
             });
         });
     }
-    
+    async deleteMovieCart(movie_id, user_id) {
+        return new Promise((resolve, reject) => {
+            const values = [movie_id, user_id];
+            console.log(values)
+            const query = `DELETE FROM cart WHERE movie_id = ? AND user_id = ?;`
+            this.dbConnection.run(query, values, (err, rows) =>{
+                if(err) {
+                    reject(err)
+                }
+                else {
+                    resolve(rows)
+                }
+            });
+        });
+    }
 }

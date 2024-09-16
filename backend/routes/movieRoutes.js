@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { AuthService } from "../services/authServices.js";
-import {addToCart, getCart} from '../controllers/cartController.js'
+import {addToCart, getCart, deleteMovieCart} from '../controllers/cartController.js'
 import {
     getMovies,
     createMovie,
@@ -22,5 +22,5 @@ movieRouter.delete("/", deleteMovie);
 movieRouter.put("/:id", updateMovie);
 movieRouter.post('/addToCart', addToCart);
 movieRouter.get('/getCart/:id', getCart);
-
+movieRouter.delete('/getCart/:id',deleteMovieCart);
 export default movieRouter;
