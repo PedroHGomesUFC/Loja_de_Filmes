@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import MovieView from '../views/MovieView.vue';
 import AddMovie from '../views/AddMovie.vue';
 import loginView from '../views/loginView.vue';
-
+import CartView from '../views/CartView.vue'
 import { useUserStore } from '../stores/UserStore';
 
 const routes = [
@@ -12,6 +12,13 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: { requiresAuth: true }
+  },
+  {
+    path:'/Cart/:userId',
+    name: 'Cart',
+    component: CartView,
+    props: true,
+    meta: {requiresAuth: true }
   },
   {
     path: '/MovieView/:movieId',

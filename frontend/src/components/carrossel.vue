@@ -16,21 +16,21 @@
 import { ref, onMounted } from 'vue';
 import Card from "./card.vue";
 import axios from 'axios';
-import Header from './header.vue';
+import { useUserStore } from '../stores/UserStore';
 export default {
   name: 'Carrossel',
   components: {
     Card
   },
   setup() {
+    const userStore = useUserStore(); //Pegando do PINIA
     const slider = ref(null);
     const movieIds = ref([])
-    const token = localStorage.getItem('token');
     const fetchMovieIds = async () => {
       try {
         const response = await axios.get('http://localhost:3000/movies/', {
           headers: {
-            Authorization: `Bearer ${token}`, // Envia o token no header da requisição
+            Authorization: `Bearer ${userStore.jwt}`, // Envia o token no header da requisição
           },
         });
         movieIds.value = response.data.movies.map(movie => movie.idTMDB);

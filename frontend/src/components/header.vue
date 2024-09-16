@@ -2,7 +2,7 @@
   <div class="header">
     <div class="logo-links">
       <router-link to="/" class="logo">
-        <img src="../../public/img/E-Motion.svg" alt="logo e-motion">
+        <img src="/img/E-Motion.svg" alt="logo e-motion">
       </router-link>
       <nav class="nav-links">
         <router-link to="/">Início</router-link>
@@ -12,23 +12,30 @@
     </div>
     <div class="icons">
       <span class="icon">
-        <router-link to="#"><img src="../../public/img/icons/icon_Search.svg" alt="icone de pesquisa de filmes"></router-link>
+        <router-link to="#"><img src="/img/icons/icon_Search.svg" alt="icone de pesquisa de filmes"></router-link>
       </span> <!-- ícone de busca -->
       <span class="icon">
-        <router-link to="#"><img src="../../public/img/icons/icon_Buycard.svg" alt="icone de carrinho de compras dos filmes"></router-link>
+        <router-link :to="`/Cart/${userStore.user.id}`"><img src="/img/icons/icon_Buycard.svg" alt="icone de carrinho de compras dos filmes"></router-link>
       </span> <!-- ícone de carrinho -->
       <span class="icon">
-        <router-link to="/login"><img src="../../public/img/icons/icon_Profile.svg" alt="icone do perfil do usuário"></router-link>
+        <router-link to="/login"><img src="/img/icons/icon_Profile.svg" alt="icone do perfil do usuário"></router-link>
       </span> <!-- ícone de usuário -->
     </div>
   </div>
 </template>
 
-
 <script>
+import { useUserStore } from '../stores/UserStore';
 export default {
-  name: 'Header'
-}
+  name: 'Header',
+  setup() {
+    const userStore = useUserStore();
+
+    return {
+      userStore, // Retorne o userStore para acessá-lo no template
+    };
+  }
+};
 </script>
 
 <style scoped>
