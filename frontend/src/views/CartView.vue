@@ -1,8 +1,8 @@
 <template>
     <Header id="head"/>
     <div id="main">
-    <div class="movie-list">
         <h2>Filmes no Carrinho</h2>
+    <div class="movie-list">
         <ul>
             <li>
                 <Card v-for="movieId in movieIds" :key="movieId" :movieId="movieId" class="Card" />
@@ -61,7 +61,12 @@ ul {
     list-style: none;
     padding: 0;
 }
-
+h2 {
+    color: white;
+    font-family: "Coolvetica";
+    font-weight: 200;
+    margin-left: 5%;
+}
 li {
     margin: 10px 0;
     padding: 10px;
@@ -89,17 +94,17 @@ li {
     margin-right: 0px;
     border-radius: 3%;
 }
-</style>
+.movie-list::-webkit-scrollbar {
+  width: 5px;
+}
 
-<!-- const fetchMovieIds = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/movies/', {
-        headers: {
-          Authorization: `Bearer ${token}`, // Envia o token no header da requisição
-        },
-      });
-      movieIds.value = response.data.movies.map(movie => movie.idTMDB);
-    } catch(error) {
-      console.log('Erro ao buscar Id dos filmes: ', error)
-    }
-  } -->
+.movie-list::-webkit-scrollbar-track {
+  background-color: #000000;
+
+}
+
+.movie-list::-webkit-scrollbar-thumb {
+  background-color: #b6b6b6;
+  border-radius: 2px;
+}
+</style>
