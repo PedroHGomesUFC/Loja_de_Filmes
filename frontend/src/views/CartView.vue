@@ -78,11 +78,19 @@ export default {
 <style scoped>
 #delete {
     display: flex;
-    color: white;
-    background-color: #000000;
+    background-color: #ffffff;
     border: none;
     cursor: pointer;
     font-family: 'sf pro display';
+    margin-top: 40px;
+    width: 170px;
+    height: 25px;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 0 0 7px;
 }
 
 ul {
@@ -101,7 +109,7 @@ li {
     margin: 10px 0;
     padding: 10px;
     background: black;
-    border-bottom: 2px solid ;
+    border-bottom: 2px solid;
 }
 li:last-child {
     border: 0;
@@ -112,7 +120,7 @@ li:last-child {
 }
 
 .movie-list {
-    width: 300px;
+    width: 350px;
     max-height: 400px;
     overflow-y: auto;
     background-color: #000000;
@@ -122,9 +130,8 @@ li:last-child {
 
 .Card :deep(img) {
     min-width: 200px;
-    width: 15vw;
+    width: 12vw;
     height: auto;
-    object-fit: cover;
     margin: 12px 0;
     margin-right: 0px;
     border-radius: 3%;

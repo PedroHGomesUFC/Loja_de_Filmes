@@ -30,7 +30,7 @@ const routes = [
     path: '/AddMovie',
     name: 'AddMovie',
     component: AddMovie,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, requiresAdmin: true}
   }, {
     path: '/login',
     name: 'login',
@@ -49,6 +49,10 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const userStore = useUserStore()
   if (to.meta.requiresAuth && !userStore.isAuthenticated) {
+    return '/login'
+  }
+
+  if(to.meta.requiresAdmin  && userStore.user.adm !==1){
     return '/login'
   }
 })

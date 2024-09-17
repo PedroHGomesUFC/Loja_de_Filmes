@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
 
-  // Estado inicial usando os valores do localStorage
+
   const user = ref({
     id: Number(localStorage.getItem('id')) || null,
     username: localStorage.getItem('username') || "",
@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
 
   const jwt = ref(localStorage.getItem('token') || '')
 
-  // Computed para verificar se o usuário está autenticado
+
   const isAuthenticated = computed(() => jwt.value !== "")
 
   // Função de autenticação para salvar os dados após o login
@@ -34,7 +34,7 @@ export const useUserStore = defineStore('user', () => {
     // Atualizando o token
     jwt.value = token
 
-    // Armazenando as informações no localStorage
+    
     localStorage.setItem('id', authUser.id)
     localStorage.setItem('username', authUser.username)
     localStorage.setItem('email', authUser.email)
@@ -42,8 +42,10 @@ export const useUserStore = defineStore('user', () => {
     localStorage.setItem('adm', authUser.adm)
     localStorage.setItem('token', token)
   }
+  function admin(response) {
+    
+  }
 
-  // Função de logout
   function logout() {
     jwt.value = ""
     user.value = {

@@ -3,7 +3,7 @@
     <div class="container">
       <div id="details">
         <form @submit.prevent="submitMovieId">
-          <label class="itemForm" for="idMovie">Digite o ID do filme</label>
+          <label class="itemForm" id="Title" for="idMovie">Digite o ID do filme</label>
           <input class="itemForm" type="number" v-model="movieId">
           <input class="itemForm" type="submit" value="Enviar ID">
         </form>
@@ -55,9 +55,18 @@
     padding-top: 10%;
     text-align: center;
     justify-content:center;
+    max-width: 300px;
   }
   .itemForm {
     margin-top: 4%;
+  }
+  #Title {
+  color: white;
+  font-family: "Coolvetica";
+  font-weight: 200;
+  margin-left: 5%;
+  padding-top: 20px;
+  font-size: 24pt;
   }
   </style>
   

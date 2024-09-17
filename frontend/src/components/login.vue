@@ -73,7 +73,7 @@ export default {
     color: white;
     margin-top: 10px;
     font-size: 25px;
-    font-family: 'sf pro display';
+    font-family:'SF Pro Display';
   }
   .form_login {
     display: flex;
@@ -87,7 +87,7 @@ export default {
     width: 500px;
     height: 44px;
     margin-top: 25px;
-    font-family: 'sf pro display';
+    font-family:'SF Pro Display';
     color: white;
     font-size: 1.1em;
     padding: 0px 1% 0px 1%;
@@ -103,7 +103,7 @@ export default {
   border-radius: 3px;
   width: 13%;
   min-width: 250px;
-  font-family:'sf pro display';
+  font-family:'SF Pro Display';
   font-weight: bold;
   font-size: 20px;
   margin-top: 2%;
@@ -115,7 +115,7 @@ export default {
 }
 .options {
     color: white;
-    font-family:'sf pro display';
+    font-family:'SF Pro Display';
     font-size: 18px;
     padding-top: 10px;
 }

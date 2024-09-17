@@ -130,16 +130,15 @@ export default {
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #EC1E20;
-  color: white;
+  margin-top: 40px;
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(to right, #ece21e 10%, white 10% 80% );
+  color: rgb(0, 0, 0);
   border: none;
-  border-radius: 5px;
+  border-radius: 2px;
   font-size: 16px;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #C0171A;
+  font-family: 'Coolvetica';
 }
 </style>
