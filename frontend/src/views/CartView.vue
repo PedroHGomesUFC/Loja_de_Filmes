@@ -77,7 +77,12 @@ export default {
 
 <style scoped>
 #delete {
+    display: flex;
     color: white;
+    background-color: #000000;
+    border: none;
+    cursor: pointer;
+    font-family: 'sf pro display';
 }
 
 ul {
@@ -95,8 +100,11 @@ h2 {
 li {
     margin: 10px 0;
     padding: 10px;
-    border-radius: 5px;
     background: black;
+    border-bottom: 2px solid ;
+}
+li:last-child {
+    border: 0;
 }
 
 #main {
