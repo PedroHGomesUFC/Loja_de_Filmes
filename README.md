@@ -50,15 +50,26 @@ Typescript, Node.js, Express
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Usuário |  |  X  | X | X |
+| Usuário |  |  X  |   | X |
 | Admin | X | X |  X | X |
-| Compras? |  |   | X | X |
+| CART |  |   | X | X |
 
 
 ## :neckbeard: Rotas da API REST utilizadas
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api/entidade1/|
-| POST | api/entidade2 |
+| GET | http://localhost:3000/movies/ |
+| POST | http://localhost:3000/users/login |
+| POST | 'http://localhost:3000/movies/ |
+| POST | 'http://localhost:3000/movies/ |
+| DELETE | http://localhost:3000/movies/getCart/${userStore.user.id} |
+| GET | http://localhost:3000/movies/getCart/${userStore.user.id} |
+| GET | http://localhost:3000/movies/${id} |
+| POST | http://localhost:3000/movies/addToCart |
 
+## Comandos para rodas e observações
+Backend: node app.js
+Frontend: npm run serve
+
+A página de adicionar filmes só tem acesso digitando a URL: http://localhost:8080/addMovie
