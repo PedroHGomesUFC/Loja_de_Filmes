@@ -68,7 +68,7 @@ Typescript, Node.js, Express
 | GET | http://localhost:3000/movies/${id} |
 | POST | http://localhost:3000/movies/addToCart |
 
-## Comandos para rodas e observações
+## Comandos para rodar o código e observações
 Backend: node app.js
 Frontend: npm run serve
 
